@@ -1,0 +1,71 @@
+# Step 3: Run METAL
+  + All datasets being meta analyzed were QC'd with GWASInspector, so they should all have the same column names
+  + I made up the "MOCK" INPUT file for this since you can't meta analyze a single dataset. In your case, you should add the ===DESCRIBE...== for every file you are meta analyzing! Other than that, you'll only change the 'OUTFILE' to match the directory and name where the meta results will output. 
+  
+  
+```{bash}
+SCHEME STDERR  ## this is the type of weighted avg we're doing (can be stderr or sample size)
+AVERAGEFREQ ON ## we also want avg allele freq
+MINMAXFREQ ON  ## whether you want a col for min and max freqs
+TRACKPOSITIONS ON  ## just always have this on
+GENOMICCONTROL ON
+# === PAD AFR ===
+MARKER varID
+ALLELE EFFECT_ALL OTHER_ALL
+EFFECT EFFECT
+STDERR STDERR
+FREQLABEL EFF_ALL_FREQ
+CHROMOSOMELABEL CHR
+POSITIONLABEL POSITION
+PVAL PVALUE
+PROCESS /project/damrauer_scratch/Users/saleemsa/PAD_Signals/MetalInput/QC_QC_ready_PAD5c_afr.txt.gz
+# === PAD AMR ===
+MARKER varID
+ALLELE EFFECT_ALL OTHER_ALL
+EFFECT EFFECT
+STDERR STDERR
+FREQLABEL EFF_ALL_FREQ
+CHROMOSOMELABEL CHR
+POSITIONLABEL POSITION
+PVAL PVALUE
+PROCESS /project/damrauer_scratch/Users/saleemsa/PAD_Signals/MetalInput/QC_QC_ready_PAD5c_amr.txt.gz
+# === PAD EAS ===
+MARKER varID
+ALLELE EFFECT_ALL OTHER_ALL
+EFFECT EFFECT
+STDERR STDERR
+FREQLABEL EFF_ALL_FREQ
+CHROMOSOMELABEL CHR
+POSITIONLABEL POSITION
+PVAL PVALUE
+PROCESS /project/damrauer_scratch/Users/saleemsa/PAD_Signals/MetalInput/QC_QC_ready_PAD5c_eas.txt.gz
+# === PAD EUR ===
+MARKER varID
+ALLELE EFFECT_ALL OTHER_ALL
+EFFECT EFFECT
+STDERR STDERR
+FREQLABEL EFF_ALL_FREQ
+CHROMOSOMELABEL CHR
+POSITIONLABEL POSITION
+PVAL PVALUE
+PROCESS /project/damrauer_scratch/Users/saleemsa/PAD_Signals/MetalInput/QC_QC_ready_PAD5c_eur.txt.gz
+
+OUTFILE /project/damrauer_scratch/Users/saleemsa/PAD_Signals/MetalOutput
+ANALYZE HETEROGENEITY
+QUIT
+```  
+  
+  
+Configuration File
+# PRIOR TO RUNNING METAL - make a text file 
+## within Terminal, cd to where you want to put the text file and run the NANO command (line 123) changing the filename to reflect your project
+```{bash, eval = FALSE, include = TRUE}
+# NANO
+nano carotid_stenosis_meta_METAL.txt #input this into terminal, then copy the above chunk into the the blank terminal window, press control 'X',then the 'Y' key, then Enter
+# Execute METAL in Terminal (don't change the metal-2020-05-05 pathway. Do change the /project/damrauer_shared/Users... pathway to point to where you saved the NANO text file you made above)
+
+/project/voltron/Applications/METAL/metal-2020-05-05 /project/damrauer_scratch/Users/saleemsa/PAD_Signals/PAD_meta_METAL.txt
+
+```
+          
+DONE! 
